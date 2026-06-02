@@ -1,0 +1,147 @@
+/* =========================================
+   RULER CORE STYLES FOR TINYMCE
+   ========================================= */
+
+/* ------------------------------
+   Horizontal Ruler (Top)
+   ------------------------------ */
+.ruler-bar.fixed-top {
+  position: fixed;
+  top: 0;
+  left: 40px; /* leave gutter for vertical ruler */
+  right: 0;
+  height: 28px;
+  background: #f7f7f7;
+  border-bottom: 1px solid #d1d5db;
+  z-index: 9999;
+  display: block;
+  box-sizing: border-box;
+  pointer-events: none; /* allow content interaction below */
+}
+
+/* Horizontal ruler canvas */
+.ruler-canvas {
+  display: block;
+  width: 100%;
+  height: 24px;
+  pointer-events: none;
+}
+
+/* ------------------------------
+   Vertical Ruler (Left)
+   ------------------------------ */
+.vertical-ruler.fixed-left {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  bottom: 0;
+  background: #f7f7f7;
+  border-right: 1px solid #d1d5db;
+  z-index: 9998;
+  box-sizing: border-box;
+  padding-top: 4px;
+  pointer-events: none;
+}
+
+/* Vertical ruler canvas */
+.vertical-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ------------------------------
+   Marker Common Styles
+   ------------------------------ */
+.ruler-marker,
+.v-marker {
+  pointer-events: auto;
+  position: absolute;
+  width: 8px; /* reduced width to prevent overlap */
+  height: 20px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  user-select: none;
+  transition: background 0.15s ease;
+  z-index: 10000;
+}
+
+/* Horizontal markers */
+.left-marker {
+  top: 4px;
+  background: #0ea5e9; /* blue */
+  cursor: ew-resize;
+  z-index: 100001;
+}
+
+.indent-marker {
+  top: 4px;
+  background: #22c55e; /* green */
+  cursor: ew-resize;
+  margin-left: 4px; /* slight offset to prevent overlap hitbox */
+  z-index: 100002;
+}
+
+/* Right marker should be draggable at all times */
+.right-marker {
+  top: 4px;
+  background: #e11d48; /* red/pink */
+  cursor: ew-resize;
+  right: 8px; /* visually align to right edge */
+  left: auto !important;
+  z-index: 100005 !important; /* always topmost horizontally */
+}
+
+/* Hover feedback */
+.ruler-marker:hover,
+.v-marker:hover {
+  filter: brightness(1.1);
+}
+
+.ruler-marker:active,
+.v-marker:active {
+  filter: brightness(0.9);
+}
+
+/* ------------------------------
+   Editor Content Padding
+   ------------------------------ */
+.mce-content-body {
+  padding-top: 36px !important; /* space for horizontal ruler */
+  padding-left: 40px !important; /* space for vertical ruler */
+  box-sizing: border-box;
+  transition: padding 0.15s ease;
+}
+
+/* ------------------------------
+   Print / Export Handling
+   ------------------------------ */
+@media print {
+  .ruler-bar,
+  .ruler-marker,
+  .v-marker {
+    display: none !important;
+  }
+
+  .mce-content-body {
+    padding-top: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* ------------------------------
+   Edit Area Adjustment
+   ------------------------------ */
+.tox-edit-area,
+.tox-edit-area iframe {
+  height: calc(100% - 0px) !important;
+}
+
+/* ------------------------------
+   Extra Fix: Prevent Overlaps
+   ------------------------------ */
+.ruler-bar .ruler-marker {
+  pointer-events: auto;
+}

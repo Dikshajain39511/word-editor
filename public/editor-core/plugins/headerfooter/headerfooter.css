@@ -1,0 +1,15 @@
+.custom-header,
+.custom-footer {
+  width: 100%;
+  background: #f8f8f8;
+  color: #333;
+  padding: 8px;
+  border: 1px dashed #ccc;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 16px;
+}
+.custom-header:focus,
+.custom-footer:focus {
+  outline: 2px solid #0078d4;
+}

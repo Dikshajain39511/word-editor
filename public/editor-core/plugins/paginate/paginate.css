@@ -1,0 +1,82 @@
+/* Visual A4 page */
+.paginate-page {
+  width: 794px; /* A4 @ ~96dpi */
+  height: 1122px; /* fixed height (not min-height) to avoid extra tail space */
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  margin: 18px auto;
+  position: relative;
+  overflow: hidden; /* strictly clip per-page */
+  box-sizing: border-box;
+}
+
+/* Header / Footer are absolutely positioned and TRANSPARENT */
+.page-header,
+.page-footer {
+  position: absolute;
+  left: 40px; /* same as JS DEFAULT_GUTTER in paginate.js */
+  right: 40px;
+  background: transparent !important;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Header top line */
+.page-header {
+  top: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 6px;
+}
+
+/* Footer bottom line */
+.page-footer {
+  bottom: 24px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 6px;
+}
+
+/* The editable content area — positioning is applied inline by JS using measured HF heights */
+.paginate-page-main {
+  position: absolute; /* set by JS with left/right/top/bottom */
+  overflow: visible;
+  box-sizing: border-box;
+  color: #111;
+  line-height: 1.45;
+  font-size: 16px;
+  /* IMPORTANT: no padding here; JS sets exact top/bottom from measured HF */
+}
+
+/* Manual page break marker */
+.paginate-page-break {
+  display: block;
+  border-top: 2px dashed #d1d5db;
+  margin: 14px 0;
+  text-align: center;
+  color: #9ca3af;
+  padding-top: 6px;
+}
+.paginate-break-note {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+@media print {
+  .paginate-page {
+    box-shadow: none !important;
+    width: auto !important;
+    height: auto !important;
+    page-break-after: always !important;
+  }
+  .page-header,
+  .page-footer,
+  .paginate-break-note,
+  .paginate-page-break {
+    display: none !important;
+  }
+  .paginate-page-main {
+    position: static !important;
+    padding: 0 !important;
+  }
+}
